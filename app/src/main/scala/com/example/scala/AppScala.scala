@@ -53,4 +53,15 @@ object AppScala {
     println("completed")
   }
 
+
+  def getSparkSession(): SparkSession =
+    SparkSession
+      .builder
+      .appName("Spark MongoDB")
+      .master("local[*]")
+      .config("spark.jars.packages", "org.mongodb.spark:mongo-spark-connector_2.13:10.2.0")
+      .config("spark.mongodb.read.connection.uri", "mongodb://localhost:27017/latest_db.students")
+      .config("spark.mongodb.write.connection.uri", "mongodb://localhost:27017/latest_db.students")
+      .getOrCreate()
+
 }
